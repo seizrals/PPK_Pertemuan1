@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=0" name="viewport">
+    <title>Dashboard</title>
+    <!-- BOX ICONS -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <!-- MATERIAL CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --color-primary: #319B77;
+    --color-danger: #DC143C;
+    --color-success: #7FFF00;
+    --color-warning: #FFFF00;
+    --color-white: #FFFFFF;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --cloro-primary-variant: #1111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+/* ----------------- DARK THEME VARIABLES ------------------ */
+.dark-theme-variables {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-info-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --colot-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --color-primary: #319B77;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+}
+
+small{
+    font-size: 0.75rem;
+}
+
+/* ---------------- NAVBAR ------------------- */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.menu{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 4rem;
+}
+
+.menu .logo img{
+    width: 5vw;
+    height: auto;
+}
+
+.menu a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding-right: 30px;
+    color: var(--color-dark);
+    position: relative;
+    transition: all 300ms ease;
+}
+
+a span.material-icons-sharp, a h3 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.menu a span{
+    margin-right: 8px;
+    font-size: 1.5rem;
+}
+
+.menu a.active {
+    color: var(--color-primary);
+    margin-left: 0;
+}
+
+.menu a:hover {
+    color: var(--color-primary);
+}
+
+.menu a h3{
+    font-size: 12px;
+}
+
+.right-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 1.5rem;
+}
+
+.theme-toggler {
+    background: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 5.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+}
+
+.profile {
+    display: flex;
+    text-align: right;
+    align-items: center;
+  }
+  
+.profile .info {
+    margin-right: 1rem;
+}
+
+.profile-photo{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --------------- BOARD ---------------- */
+.board{
+    font-size: 1.6rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.table{
+    margin-top: 2rem;
+    gap: 15rem;
+    text-align: center;
+    justify-content: center;
+    width: 1200px;
+    border-collapse: collapse;
+}
+
+.table-container {
+    margin: 0 auto;
+    max-width: 100%;
+    margin-bottom: 4rem;
+}
+  
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+  
+.table th {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.table td {
+    text-align: center;
+    font-weight: 300;
+    font-size: 1rem;
+}
+  
+.table td:last-child {
+    white-space: nowrap;
+}
+
+.table thead th{
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-tambah{
+    margin-top: 5rem;
+    margin-left: 70rem;
+    background: var(--color-white);
+    border-radius: var(--border-radius-1);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.3rem;
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="menu">
+            <div class="logo">
+                <img th:src="@{/image/logo.png}" alt="logo">
+                <small class="text-muted">by.seizraaulia</small>
+            </div>
+            <a th:href="@{/}">
+                <span class="material-icons-sharp">home</span>
+                <h3>Home</h3>
+            </a>
+            <a href="#" class="active">
+                <span class="material-icons-sharp">inventory</span>
+                <h3>Daftar Mahasiswa</h3>
+            </a>
+        </div>
+        <div class="right-menu">
+            <div class="profile">
+                <div class="info">
+                    <p>Hey, <b>Mahasiswa STIS</b></p>
+                    <small class="text-muted">User</small>
+                </div>
+                <div class="profile-photo">
+                    <img th:src="@{/image/person.jpg}" alt="profile_picture">
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <!-- BOARD -->
+    <div class="board">
+        <h2>Daftar Mahasiswa</h2>
+        <button>
+            <a th:href="@{/tambah-mahasiswa}" class="btn-tambah">Tambah Mahasiswa</a>
+        </button>
+        <div class="tabel-container">
+            <table class="table">
+                <thead>
+                   <tr>
+                        <th>NIM</th>
+                        <th>Nama</th>
+                        <th>Jurusan</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Action</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr th:each="mahasiswa: ${mahasiswaList}">
+                        <td th:text="${mahasiswa.nim}"></td>
+                        <td th:text="${mahasiswa.nama}"></td>
+                        <td>
+                            <span th:if="${mahasiswa.jurusan == T(com.ppk.penugasan1.entity.Mahasiswa.Jurusan).D3_Statistika}">D-III Statistika</span>
+                            <span th:if="${mahasiswa.jurusan == T(com.ppk.penugasan1.entity.Mahasiswa.Jurusan).D4_Komputasi}">D-IV Komputasi Statistik</span>
+                            <span th:if="${mahasiswa.jurusan == T(com.ppk.penugasan1.entity.Mahasiswa.Jurusan).D4_Statistika}">D-IV Statistika</span>
+                        </td>
+                        <td th:text="${mahasiswa.tanggalLahir}"></td>
+                        <td>
+                            <a th:href="@{/mahasiswa/edit/{nim}(nim=${mahasiswa.nim})}" class="btn btn-success">Edit</a> |
+                            <a th:href="@{/mahasiswa/delete/{nim}(nim=${mahasiswa.nim})}" class="btn btn-danger">Hapus</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
